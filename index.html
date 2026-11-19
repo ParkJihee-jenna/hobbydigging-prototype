@@ -247,8 +247,8 @@ textarea.field{min-height:96px;resize:none}
 .curri{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}.curri li{display:flex;gap:12px;align-items:flex-start}.curri li>b{flex:none;width:24px;height:24px;border-radius:50%;background:var(--subtle);color:var(--tx2);font-size:12px;display:grid;place-items:center}
 .msgs{padding:8px 16px 16px;display:flex;flex-direction:column;gap:10px}.day{align-self:center;font-size:11px;color:var(--tx3);background:var(--subtle);border-radius:999px;padding:2px 10px;margin:4px 0}
 .about{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--tx2);background:var(--subtle);border-radius:12px;padding:8px 12px}
-.msg{display:flex;align-items:flex-end;gap:8px}.msg.me{flex-direction:row-reverse}.msg .col{display:flex;flex-direction:column;gap:4px;max-width:72%}
-.bub{background:var(--subtle);color:var(--tx);border-radius:18px 18px 18px 6px;padding:9px 13px;font-size:15px;line-height:21px;white-space:pre-wrap;word-break:break-word}.msg.me .bub{background:var(--sky-600);color:#fff;border-radius:18px 18px 6px 18px}
+.msg{display:flex;align-items:flex-end;gap:8px}.msg.mine{flex-direction:row-reverse}.msg .col{display:flex;flex-direction:column;gap:4px;max-width:72%}
+.bub{background:var(--subtle);color:var(--tx);border-radius:18px 18px 18px 6px;padding:9px 13px;font-size:15px;line-height:21px;white-space:pre-wrap;word-break:break-word}.msg.mine .bub{background:var(--sky-600);color:#fff;border-radius:18px 18px 6px 18px}
 .msg .at{font-size:10px;color:var(--tx3);flex:none}
 .chatbar{display:flex;gap:8px;align-items:center;padding-top:10px}.chatbar .field{border-radius:999px;padding:11px 16px}
 .send{flex:none;width:42px;height:42px;border-radius:50%;background:var(--sky-600);color:#fff;display:grid;place-items:center}.send:active{transform:scale(.94)}
@@ -581,7 +581,7 @@ room(){
   const r=S.room,L=roomMsgs(r);
   return `${sub(esc(r.n)+(r.p?` <span class="t3" style="font-weight:500">${r.p}</span>`:''),`<button type="button" class="ib r" data-a="soon" data-v="채팅방 메뉴" aria-label="채팅방 메뉴">${i('ellipsis-vertical')}</button>`)}
   <div class="scroll" id="roomSc"><div class="msgs">${r.about?`<div class="about">${i('info',14)}<span>${esc(r.about)} 문의</span></div>`:''}<div class="day">오늘</div>
-    ${L.map(m=>`<div class="msg ${m.me?'me':''}">${m.me?'':av(32)}<span class="col">${!m.me&&m.who?`<span class="cm" style="color:var(--tx3)">${esc(m.who)}</span>`:''}<span class="bub">${esc(m.t)}</span></span><span class="at">${m.at}</span></div>`).join('')}</div></div>
+    ${L.map(m=>`<div class="msg ${m.me?'mine':''}">${m.me?'':av(32)}<span class="col">${!m.me&&m.who?`<span class="cm" style="color:var(--tx3)">${esc(m.who)}</span>`:''}<span class="bub">${esc(m.t)}</span></span><span class="at">${m.at}</span></div>`).join('')}</div></div>
   <div class="bottom chatbar"><input id="roomIn" class="field" placeholder="메시지를 입력하세요" autocomplete="off" style="user-select:text" aria-label="메시지"><button type="button" class="send" data-a="send" aria-label="보내기">${i('arrow-up',20)}</button></div>`;
 },
 
