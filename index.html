@@ -226,7 +226,7 @@ textarea.field{min-height:96px;resize:none}
 .mapin>img{width:393px;height:696px;max-width:none}
 .haze{position:absolute;left:0;right:0;height:110px;top:0;background:linear-gradient(#fff,rgba(255,255,255,0))}
 .mlabel{position:absolute;height:22px;padding:0 8px;background:rgba(255,255,255,.92);border-radius:999px;font-size:11px;line-height:22px;font-weight:500;color:var(--tx2);transform:translateX(-50%);white-space:nowrap}
-.me{position:absolute;left:142px;top:196px;width:44px;height:44px}
+.mapin .me{position:absolute;left:142px;top:196px;width:44px;height:44px}
 .me i{position:absolute;border-radius:50%}
 .me .h{inset:0;background:var(--sky-600);opacity:.18}
 .me.ping .h{animation:ping 1s var(--ease) 2}
@@ -638,7 +638,7 @@ my(){
     <div class="card mcardb"><div class="row" style="justify-content:space-between"><span class="row"><span class="t2">나의 취미</span><span class="t2 brandtx">${S.hobbies.length}</span></span><button type="button" class="bs" data-a="addHobby">${i('plus',16)}취미 추가</button></div>
       <div class="grid2">${hs.map(h=>{const c=CAT[h.id]||CAT.etc;return `<button type="button" class="mh" data-a="pickHobby" data-v="${h.id}"><span class="tile" style="width:40px;height:40px;background:${c.bg};color:${c.fg}">${i(h.icon,20)}</span><span style="min-width:0"><span class="b2b" style="display:block">${esc(h.name)}</span><span class="cm"><span class="brandtx">Lv.${h.lv}</span> <span style="color:var(--tx3)">${h.count}번 기록</span></span></span></button>`}).join('')}</div>
       ${S.hobbies.length>4?`<button type="button" class="linkc" data-a="hobAll">${S.hobAll?'접기':`취미 ${S.hobbies.length}개 모두 보기`}${i('chevron-right',16)}</button>`:''}</div>
-    <div class="card mcardb"><div class="row" style="justify-content:space-between"><span class="row"><span class="t2">나의 기록</span><span class="t2 brandtx">${all}</span></span><button type="button" class="bs pri" data-a="tab" data-v="record">${i('plus',16)}오늘 기록 시작</button></div>
+    <div class="card mcardb"><div class="row" style="justify-content:space-between"><span class="row"><span class="t2">나의 기록</span><span class="t2 brandtx">${all}</span></span><button type="button" class="bs pri" data-a="prep">${i('settings',16)}취미 설정</button></div>
       <div class="row" style="gap:8px;flex-wrap:wrap">${Object.keys(counts).map(c=>`<button type="button" class="chip ${S.recChip===c?'on':''}" data-a="recChip" data-v="${c}">${c} ${counts[c]}</button>`).join('')}</div>
       <div class="gr3">${recs.map(r=>r.img?`<div>${thumb(r.img)}</div>`:`<div style="background:${(CAT[r.cat]||CAT.etc).bg};color:${(CAT[r.cat]||CAT.etc).fg}">${i(r.icon)}</div>`).join('')}</div></div>
   </div><div class="tabspace"></div></div>${tabbar('my')}`;
@@ -743,7 +743,7 @@ function finishTimer(auto){const t=S.timer;stopTick();S.draft=newDraft(S.hobby,t
 /* ---------- 동작 ---------- */
 const A={
   tab:v=>tabTo(v),go:v=>go(v),back(){if(cur==='timer'&&S.timer){S.timer.running=false;S.timer.saved=true;stopTick();stack=['record'];show('start','back');toast('시작 화면에서 이어 할 수 있어요');return}back()},
-  soon:v=>toast(`${v} 화면은 이 프로토타입에 없어요`),
+  prep:()=>toast('화면 준비중이에요'),soon:v=>toast(`${v} 화면은 이 프로토타입에 없어요`),
   closeBanner(){S.banner=false;paint()},
   homeTab(v){S.homeTab=v;paint()},homeChip(v){S.homeChip=v;paint()},
   like(v){S.liked[v]=!S.liked[v];paint()},mark(v){S.marked[v]=!S.marked[v];toast(S.marked[v]?'저장했어요':'저장을 취소했어요');paint()},
